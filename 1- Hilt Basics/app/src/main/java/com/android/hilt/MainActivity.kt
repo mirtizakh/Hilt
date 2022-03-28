@@ -2,7 +2,6 @@ package com.android.hilt
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,8 +29,8 @@ class MainActivity : AppCompatActivity() {
 class SomeClass
 @Inject
 constructor(
-    private val someInterfaceImp1: SomeInterface,
-    private val someInterfaceImp2: SomeInterface,
+    @Impl1 private val someInterfaceImp1: SomeInterface,
+    @Impl2 private val someInterfaceImp2: SomeInterface,
 ) {
     fun doAThing1(): String {
         return "Look I got: ${someInterfaceImp1.getAThing()}"
@@ -67,12 +66,14 @@ interface SomeInterface {
 @Module
 class MyModule {
 
+    @Impl1
     @Singleton
     @Provides
     fun provideSomeInterface1(): SomeInterface {
         return SomeInterfaceImp1()
     }
 
+    @Impl2
     @Singleton
     @Provides
     fun provideSomeInterface2(): SomeInterface {
@@ -83,3 +84,9 @@ class MyModule {
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
+annotation class Impl1
+
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class Impl2
