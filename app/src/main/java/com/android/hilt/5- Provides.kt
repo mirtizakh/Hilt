@@ -9,9 +9,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
-import javax.inject.Qualifier
 import javax.inject.Singleton
 
+/*
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -22,40 +22,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        println(someClass.doAThing1())
-        println(someClass.doAThing2())
+        println(someClass.doAThing())
     }
 }
 
 class SomeClass
 @Inject
 constructor(
-    private val someInterfaceImp1: SomeInterface,
-    private val someInterfaceImp2: SomeInterface,
+    private val someInterfaceImp: SomeInterface,
+    private val gson: Gson
 ) {
-    fun doAThing1(): String {
-        return "Look I got: ${someInterfaceImp1.getAThing()}"
-    }
-
-    fun doAThing2(): String {
-        return "Look I got: ${someInterfaceImp2.getAThing()}"
-    }
-
-}
-
-class SomeInterfaceImp1
-@Inject
-constructor() : SomeInterface {
-    override fun getAThing(): String {
-        return "A Thing 1"
+    fun doAThing(): String {
+        return "Look I got: ${someInterfaceImp.getAThing()}"
     }
 }
 
-class SomeInterfaceImp2
+class SomeInterfaceImp
 @Inject
 constructor() : SomeInterface {
     override fun getAThing(): String {
-        return "A Thing 2"
+        return "A Thing"
     }
 }
 
@@ -69,17 +55,16 @@ class MyModule {
 
     @Singleton
     @Provides
-    fun provideSomeInterface1(): SomeInterface {
-        return SomeInterfaceImp1()
+    fun provideSomeInterface(): SomeInterface {
+        return SomeInterfaceImp()
     }
 
     @Singleton
     @Provides
-    fun provideSomeInterface2(): SomeInterface {
-        return SomeInterfaceImp2()
+    fun provideGson(): Gson {
+        return Gson()
     }
 
 }
 
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
+ */
